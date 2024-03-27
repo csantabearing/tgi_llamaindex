@@ -9,19 +9,15 @@ from llama_index.core import (
     Settings
 )
 import os.path
+from llama_index.llms import LangChainLLM
+from langchain.llms import HuggingFaceTextGenInference
+from llama_index import PromptTemplate
 
-from llama_index.llms.openai_like import OpenAILike
-
-Settings.llm = OpenAILike(
-    model="tgi",
-    api_key=os.getenv('HF_API_KEY'),
-    api_base=os.getenv('IP_ADDRESS') + "/v1/",
-    is_chat_model=True,
-    is_local=False,
-    is_function_calling_model=False,
-    context_window=4096,
+query_wrapper_prompt = PromptTemplate("[INST]{query_str}[/INST]")
+Settings.llm = LangChainLLM(
+  HuggingFaceTextGenInference(inference_server_url=os.getenv('IP_ADDRESS')),
+  query_wrapper_prompt=query_wrapper_prompt
 )
-
 
 Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
 

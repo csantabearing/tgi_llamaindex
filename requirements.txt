@@ -1,6 +1,6 @@
 fastapi
 llama-index
-llama-index-llms-openai-like
+llama-index-llms-langchain
 llama-index-embeddings-huggingface
-#llama-index-llms-huggingface
+langchain
 uvicorn
