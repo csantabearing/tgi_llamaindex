@@ -1,5 +1,6 @@
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from fastapi import FastAPI
+from llama_index.llms.huggingface import HuggingFaceInferenceAPI
 from llama_index.core.embeddings import resolve_embed_model
 from llama_index.core import (
     VectorStoreIndex,
@@ -9,20 +10,12 @@ from llama_index.core import (
     Settings
 )
 import os.path
-from llama_index.llms.langchain import LangChainLLM
-from langchain.llms import HuggingFaceEndpoint
+
 
 if os.getenv('ENV')=='local':
-    Settings.llm = LangChainLLM(
-    HuggingFaceEndpoint(
-        endpoint_url=os.getenv('IP_ADDRESS'),
-        max_new_tokens=512,
-        top_k=10,
-        top_p=0.95,
-        typical_p=0.95,
-        temperature=0.01,
-        repetition_penalty=1.03
-    )
+    Settings.llm = HuggingFaceInferenceAPI(
+        model_name=os.getenv('IP_ADDRESS'),
+        token=False
     )
     Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
 
