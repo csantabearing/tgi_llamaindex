@@ -11,9 +11,7 @@ from llama_index.core import (
 import os.path
 from llama_index.llms.langchain import LangChainLLM
 from langchain.llms import HuggingFaceEndpoint
-from llama_index.core import PromptTemplate
 
-query_wrapper_prompt = PromptTemplate("[INST]{query_str}[/INST]")
 Settings.llm = LangChainLLM(
   HuggingFaceEndpoint(
     endpoint_url=os.getenv('IP_ADDRESS'),
@@ -24,7 +22,6 @@ Settings.llm = LangChainLLM(
     temperature=0.01,
     repetition_penalty=1.03
 )
-  #query_wrapper_prompt=query_wrapper_prompt
 )
 
 Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
@@ -48,5 +45,5 @@ app = FastAPI()
 async def root(question:str):
     query_engine = index.as_query_engine()
     response = query_engine.query(question.strip())
-    response['response']=response['response'].strip()
+    response.response=response.response.strip()
     return response
