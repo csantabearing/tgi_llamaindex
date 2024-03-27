@@ -23,7 +23,7 @@ Settings.llm = OpenAILike(
 )
 
 
-#Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
+Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
 
 PERSIST_DIR = "storage"
 if not os.path.exists(f'{PERSIST_DIR}/docstore.json'):
