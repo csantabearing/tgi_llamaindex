@@ -10,13 +10,21 @@ from llama_index.core import (
 )
 import os.path
 from llama_index.llms.langchain import LangChainLLM
-from langchain.llms import HuggingFaceTextGenInference
+from langchain.llms import HuggingFaceEndpoint
 from llama_index.core import PromptTemplate
 
 query_wrapper_prompt = PromptTemplate("[INST]{query_str}[/INST]")
 Settings.llm = LangChainLLM(
-  HuggingFaceTextGenInference(inference_server_url=os.getenv('IP_ADDRESS')),
-  query_wrapper_prompt=query_wrapper_prompt
+  HuggingFaceEndpoint(
+    endpoint_url=os.getenv('IP_ADDRESS'),
+    max_new_tokens=512,
+    top_k=10,
+    top_p=0.95,
+    typical_p=0.95,
+    temperature=0.01,
+    repetition_penalty=1.03,
+)
+  #query_wrapper_prompt=query_wrapper_prompt
 )
 
 Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
