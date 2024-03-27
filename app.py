@@ -1,5 +1,5 @@
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from fastapi import FastAPI
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.llms.huggingface import HuggingFaceInferenceAPI
 from llama_index.core.embeddings import resolve_embed_model
 from llama_index.core import (
