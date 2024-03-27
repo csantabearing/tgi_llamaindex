@@ -22,8 +22,7 @@ Settings.llm = LangChainLLM(
     top_p=0.95,
     typical_p=0.95,
     temperature=0.01,
-    repetition_penalty=1.03,
-    token=os.getenv('HF_API_KEY')
+    repetition_penalty=1.03
 )
   #query_wrapper_prompt=query_wrapper_prompt
 )
@@ -49,4 +48,5 @@ app = FastAPI()
 async def root(question:str):
     query_engine = index.as_query_engine()
     response = query_engine.query(question.strip())
+    response['response']=response['response'].strip()
     return response
