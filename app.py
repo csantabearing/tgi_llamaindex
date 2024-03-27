@@ -10,11 +10,21 @@ from llama_index.core import (
 )
 import os.path
 
+from llama_index.llms.openai_like import OpenAILike
+
+Settings.llm = OpenAILike(
+    model="tgi",
+    api_key=os.getenv('HF_API_KEY'),
+    api_base=os.getenv('IP_ADDRESS') + "/v1/",
+    is_chat_model=True,
+    is_local=False,
+    is_function_calling_model=False,
+    context_window=4096,
+)
+
+
 #Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
 
-# ollama
-#Settings.llm = Ollama(model="mistral", request_timeout=30.0)
-# check if storage already exists
 PERSIST_DIR = "storage"
 if not os.path.exists(f'{PERSIST_DIR}/docstore.json'):
     # load the documents and create the index
