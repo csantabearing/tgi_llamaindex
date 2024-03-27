@@ -3,6 +3,8 @@ services:
     container_name: llamaindex
     env_file:
       - .env
+    environment:
+      - ENV=$COMPOSE_PROFILES
     ports:
       - "8000:8000"
     build: ./
