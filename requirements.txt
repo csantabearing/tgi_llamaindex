@@ -4,3 +4,4 @@ llama-index-llms-langchain
 llama-index-embeddings-huggingface
 langchain
 uvicorn
+text_generation

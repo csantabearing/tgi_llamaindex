@@ -23,6 +23,7 @@ Settings.llm = LangChainLLM(
     typical_p=0.95,
     temperature=0.01,
     repetition_penalty=1.03,
+    token=os.getenv('HF_API_KEY')
 )
   #query_wrapper_prompt=query_wrapper_prompt
 )
