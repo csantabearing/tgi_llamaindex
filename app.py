@@ -43,5 +43,5 @@ app = FastAPI()
 @app.get("/query")
 async def root(question:str):
     query_engine = index.as_query_engine()
-    response = query_engine.query(question)
+    response = query_engine.query(question.strip())
     return response
