@@ -12,19 +12,19 @@ import os.path
 from llama_index.llms.langchain import LangChainLLM
 from langchain.llms import HuggingFaceEndpoint
 
-Settings.llm = LangChainLLM(
-  HuggingFaceEndpoint(
-    endpoint_url=os.getenv('IP_ADDRESS'),
-    max_new_tokens=512,
-    top_k=10,
-    top_p=0.95,
-    typical_p=0.95,
-    temperature=0.01,
-    repetition_penalty=1.03
-)
-)
-
-Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
+if os.getenv('ENV')=='local':
+    Settings.llm = LangChainLLM(
+    HuggingFaceEndpoint(
+        endpoint_url=os.getenv('IP_ADDRESS'),
+        max_new_tokens=512,
+        top_k=10,
+        top_p=0.95,
+        typical_p=0.95,
+        temperature=0.01,
+        repetition_penalty=1.03
+    )
+    )
+    Settings.embed_model = resolve_embed_model("local:BAAI/bge-small-en-v1.5")
 
 PERSIST_DIR = "storage"
 if not os.path.exists(f'{PERSIST_DIR}/docstore.json'):

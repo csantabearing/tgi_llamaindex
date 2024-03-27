@@ -12,6 +12,7 @@ services:
       - $PWD/rag_data:/rag_data
 
   tgi:
+    profiles: [ "local" ]
     container_name: tgi
     image: ghcr.io/huggingface/text-generation-inference:1.4
     env_file:
