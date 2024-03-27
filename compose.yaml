@@ -1,0 +1,21 @@
+services:
+  fastapi:
+    container_name: llamaindex
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+        -~/storage:/storage
+
+  tgi:
+    container_name: tgi
+    image: ghcr.io/huggingface/text-generation-inference:1.4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
+    ports:
+      - "8080:80"
+    restart: always
+    volumes:
+        -$PWD/data:/data
