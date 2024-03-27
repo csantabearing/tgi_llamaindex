@@ -9,9 +9,9 @@ from llama_index.core import (
     Settings
 )
 import os.path
-from llama_index.llms import LangChainLLM
+from llama_index.llms.langchain import LangChainLLM
 from langchain.llms import HuggingFaceTextGenInference
-from llama_index import PromptTemplate
+from llama_index.core import PromptTemplate
 
 query_wrapper_prompt = PromptTemplate("[INST]{query_str}[/INST]")
 Settings.llm = LangChainLLM(
