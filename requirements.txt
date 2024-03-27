@@ -1,3 +1,4 @@
 fastapi
-llamaindex
+llama-index
+#llama-index-embeddings-huggingface
 uvicorn
