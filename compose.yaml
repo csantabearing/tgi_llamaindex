@@ -21,9 +21,6 @@ services:
     restart: always
     volumes:
       - $PWD/data:/data
-    environment:
-      model-id: $MODEL_ID
-      quantize: $QUANTIZATION
     deploy:
       resources:
         reservations:
