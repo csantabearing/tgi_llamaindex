@@ -1,9 +1,6 @@
 import gradio as gr
 from huggingface_hub import InferenceClient
 
-def echo(message, history):
-    return message
-
 client = InferenceClient(model="http://34.208.241.171:8080")
 
 def inference(message, history):
